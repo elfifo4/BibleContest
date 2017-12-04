@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        @font-face { font-family: Keter; src: url('KeterYG-Medium.TTF'); } 
+
+        html, body {
+            height: 100%;
+        }
+        html {
+            display: table;
+            margin: auto;
+        }
+        body {
+            font-family: Keter;
+            display: table-cell;
+            vertical-align: middle;
+        }
+        textarea{
+            font-family: Keter;
+            font-size: 20px;
+            direction:RTL;
+            text-align:right;
+            padding: 10px;
+        }
+        div, h2, h3 {
+            direction:RTL;
+            text-align: center;
+        }
+        button {
+            font-size: 20px;
+        }
+        .text { 
+            width: 100%; 
+            height: 200px 
+        }
+
+    </style>
+</head>
+<body>
+    
+    <h2>הכנס פסוקים עם טעמי המקרא</h2>
+    
+    <textarea id="myText" class="text">
+א בְּרֵאשִׁ֖ית בָּרָ֣א אֱלֹהִ֑ים אֵ֥ת הַשָּׁמַ֖יִם וְאֵ֥ת הָאָֽרֶץ׃ ב וְהָאָ֗רֶץ הָֽיְתָ֥ה תֹ֨הוּ֙ וָבֹ֔הוּ וְחֹ֖שֶׁךְ עַל־פְּנֵ֣י תְה֑וֹם וְר֣וּחַ אֱלֹהִ֔ים מְרַחֶ֖פֶת עַל־פְּנֵ֥י הַמָּֽיִם׃ ג וַיֹּ֥אמֶר אֱלֹהִ֖ים יְהִ֣י א֑וֹר וַֽיְהִי־אֽוֹר׃ ד וַיַּ֧רְא אֱלֹהִ֛ים אֶת־הָא֖וֹר כִּי־ט֑וֹב וַיַּבְדֵּ֣ל אֱלֹהִ֔ים בֵּ֥ין הָא֖וֹר וּבֵ֥ין הַחֹֽשֶׁךְ׃ ה וַיִּקְרָ֨א אֱלֹהִ֤ים ׀ לָאוֹר֙ י֔וֹם וְלַחֹ֖שֶׁךְ קָ֣רָא לָ֑יְלָה וַֽיְהִי־עֶ֥רֶב וַֽיְהִי־בֹ֖קֶר י֥וֹם אֶחָֽד׃
+    </textarea>
+
+    <br/>
+
+    <br/>
+    
+    <div id="mydiv">
+        <button onclick="removeChars('Nikud')">הסר ניקוד</button>
+            
+        <button onclick="removeChars('Teamim')">הסר טעמים</button>
+                
+        <button onclick="removeChars('NikudAndTeamim')">הסר ניקוד וטעמים</button>
+            
+        <input type="checkbox" id="eachVerseInNewLine" 
+        checked="checked" onclick='handleClick(this)'>
+        כל פסוק בשורה חדשה
+    </div>
+    
+    <h2>תוצאה:</h2>
+    
+    <textarea id="result" class="text"></textarea>
+
+
+    <script>
+
+function handleClick(cb) {
+    removeChars("eachVerseInNewLine");
+}
+
+
+        var colonSplitter = "׃";
+
+        function removeNikud(str) {
+            var nikudChars = '[' + "ְֱֲֳִֵֶַָֹֻּׁׂ" + ']';
+            str = str.replace(new RegExp(nikudChars, 'g'), "");
+            return str;
+        }
+
+        function removeTeamim(str) {
+            var teamimChars = '[' + "ֽ֪֑֧֖֪֥֭֚֮֨֜֝֕֔ׄ֒֫֬֡׀֣֤֛֦ׅ֘֙֟֗֓֞֠֩׆" + ']';
+            str = str.replace(new RegExp(teamimChars, 'g'), "");
+            return str;
+        }
+
+        function removeChars(what) {
+            var str = document.getElementById("myText").value;
+            if (what=="NikudAndTeamim") {
+                str = removeNikud(str);
+                str = removeTeamim(str);
+            }
+            else if (what=="Nikud") {
+                str = removeNikud(str);
+            }
+            else if (what=="Teamim") {
+                str = removeTeamim(str);
+            }
+            else if (what=="eachVerseInNewLine") {
+                str = document.getElementById("result").value;
+            }
+            str = str.replace(/ +/g,' ')
+
+            var eachVerseInNewLine = 
+            document.getElementById("eachVerseInNewLine").checked;
+
+            if (eachVerseInNewLine) {
+                str = str.replace(new RegExp(colonSplitter + " ?", 'g'), colonSplitter + "\n").trim();
+            }
+            else{
+                str = str.replace(new RegExp(colonSplitter + "\n", 'g'), colonSplitter + " ").trim();
+
+            }
+
+            document.getElementById("result").innerHTML = str;
+        }
+
+    </script>
+
+</body>
+</html>
