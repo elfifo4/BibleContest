@@ -1,97 +1,108 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>עיון בתנ"ך</title>
     <style>
-        @font-face { font-family: Keter; src: url('KeterYG-Medium.TTF'); } 
+        @font-face {
+            font-family: Keter;
+            src: url('KeterYG-Medium.TTF');
+        }
 
-        html, body {
+        html,
+        body {
             height: 100%;
         }
+
         html {
             display: table;
             margin: auto;
         }
+
         body {
             font-family: Keter;
             display: table-cell;
             vertical-align: middle;
         }
-        textarea{
+
+        textarea {
             font-family: Keter;
             font-size: 20px;
-            direction:RTL;
-            text-align:right;
+            direction: RTL;
+            text-align: right;
             padding: 10px;
         }
-        div, h2, h3 {
-            direction:RTL;
+
+        div,
+        h2,
+        h3 {
+            direction: RTL;
             text-align: center;
         }
+
         button {
             font-size: 20px;
         }
-        .text { 
-            width: 100%; 
-            height: 200px 
-        }
 
+        .text {
+            width: 100%;
+            height: 200px
+        }
     </style>
 </head>
+
 <body>
-    
+
     <h2>הכנס פסוקים עם טעמי המקרא</h2>
-    
+
     <textarea id="myText" class="text">
 א בְּרֵאשִׁ֖ית בָּרָ֣א אֱלֹהִ֑ים אֵ֥ת הַשָּׁמַ֖יִם וְאֵ֥ת הָאָֽרֶץ׃ ב וְהָאָ֗רֶץ הָֽיְתָ֥ה תֹ֨הוּ֙ וָבֹ֔הוּ וְחֹ֖שֶׁךְ עַל־פְּנֵ֣י תְה֑וֹם וְר֣וּחַ אֱלֹהִ֔ים מְרַחֶ֖פֶת עַל־פְּנֵ֥י הַמָּֽיִם׃ ג וַיֹּ֥אמֶר אֱלֹהִ֖ים יְהִ֣י א֑וֹר וַֽיְהִי־אֽוֹר׃ ד וַיַּ֧רְא אֱלֹהִ֛ים אֶת־הָא֖וֹר כִּי־ט֑וֹב וַיַּבְדֵּ֣ל אֱלֹהִ֔ים בֵּ֥ין הָא֖וֹר וּבֵ֥ין הַחֹֽשֶׁךְ׃ ה וַיִּקְרָ֨א אֱלֹהִ֤ים ׀ לָאוֹר֙ י֔וֹם וְלַחֹ֖שֶׁךְ קָ֣רָא לָ֑יְלָה וַֽיְהִי־עֶ֥רֶב וַֽיְהִי־בֹ֖קֶר י֥וֹם אֶחָֽד׃
     </textarea>
 
     <br/>
-    
+
     <div id="mydiv">
-	
-		<button onclick="removeChars('Copy')">שכפל</button>
-		
+
+        <button onclick="removeChars('Copy')">שכפל</button>
+
         <button onclick="removeChars('Nikud')">הסר ניקוד</button>
-            
+
         <button onclick="removeChars('Teamim')">הסר טעמים</button>
-                
+
         <button onclick="removeChars('NikudAndTeamim')">הסר ניקוד וטעמים</button>
-            
-			<br/>
-			<br/>
-        <input type="checkbox" id="eachVerseInNewLine" 
-        checked="checked" onclick='handleClickEachVerseInNewLine(this)'>
-        כל פסוק בשורה חדשה
-		
-					<br/>
-        <input type="checkbox" id="QriAndKtiv" 
-        checked="checked" onclick='handleClickQriAndKtiv(this)'>
-        כאשר יש קרי וכתיב יוצג הקרי בלבד
+
+        <br/>
+        <br/>
+        <input type="checkbox" id="eachVerseInNewLine" checked="checked" onclick='handleClickEachVerseInNewLine(this)'> כל פסוק בשורה חדשה
+
+        <br/>
+        <input type="checkbox" id="QriAndKtiv" checked="checked" onclick='handleClickQriAndKtiv(this)'> כאשר יש קרי וכתיב יוצג הקרי בלבד
     </div>
-    
+
     <h2>תוצאה:</h2>
-    
+
     <textarea id="result" class="text"></textarea>
 
 
     <script>
-
-		function handleClickEachVerseInNewLine(cb) {
-			removeChars("eachVerseInNewLine");
-		}
-
-		function handleClickQriAndKtiv(cb) {
-			removeChars("Copy");
-		}
-		
+      
         var colonSplitter = "׃";
-		var makaf = '־';
-		var alef_tav = "[א-ת]" + "{2,}";
-		
+        var makaf = '־';
+        var alef_tav = "[א-ת]" + "{2,}";
+
+        function handleClickEachVerseInNewLine(cb) {
+            removeChars("eachVerseInNewLine");
+        }
+
+        function handleClickQriAndKtiv(cb) {
+            removeChars("Copy");
+        }
+
+
+
         function removeNikud(str) {
             var nikudChars = '[' + "ְֱֲֳִֵֶַָֹֻּׁׂ" + ']';
             str = str.replace(new RegExp(nikudChars, 'g'), "");
@@ -104,82 +115,78 @@
             return str;
         }
 
-		function removeKtiv(str) {
-		    var leftBracket = "\\(", rightBracket = "\\)"; //as characters
-			var noBrackets = "[^()]+";
-			var qri_expression = // for capturing group
+        function removeKtiv(str) {
+            var leftBracket = "\\(",
+                rightBracket = "\\)"; //as characters
+            var noBrackets = "[^()]+";
+            var qri_expression = // for capturing group
                 leftBracket + '(' + noBrackets + ')' + rightBracket;
-				
-			// nun menuzeret	
-			str = str.replace(new RegExp('׆' + "\\s?", 'g'), "");
-			
-			//negative look-behind: matches " word word (qri)" that is not preceded by a colonSplitter
-			str = str.replace(new RegExp("(?<!" + colonSplitter + ')' + "\\s" + alef_tav
-                                + "\\s" + alef_tav + makaf + '?' + "\\s" + qri_expression, 'g'), " " + "$1");
 
-			str = str.replace(new RegExp(makaf + alef_tav + "\\s" + qri_expression, 'g'),
-								makaf + "$1");
-								
-			str = str.replace(new RegExp(alef_tav + makaf + '?' + "\\s" + qri_expression, 'g'),
-								"$1");
-			
-			//qri and not ktiv			
-			str = str.replace(new RegExp(qri_expression, 'g'), "$1");
-						
-			str = str.replace(new RegExp(makaf + " ", 'g'), makaf);
-			
-			str = str.replace(/ +/g,' ')
+            // nun menuzeret	
+            str = str.replace(new RegExp('׆' + "\\s?", 'g'), "");
 
-			return str;
-		}
-		
-	
+            //negative look-behind: matches " word word (qri)" that is not preceded by a colonSplitter
+            str = str.replace(new RegExp("(?<!" + colonSplitter + ')' + "\\s" + alef_tav +
+                "\\s" + alef_tav + makaf + '?' + "\\s" + qri_expression, 'g'), " " + "$1");
+
+            str = str.replace(new RegExp(makaf + alef_tav + "\\s" + qri_expression, 'g'),
+                makaf + "$1");
+
+            str = str.replace(new RegExp(alef_tav + makaf + '?' + "\\s" + qri_expression, 'g'),
+                "$1");
+
+            //qri and not ktiv			
+            str = str.replace(new RegExp(qri_expression, 'g'), "$1");
+
+            str = str.replace(new RegExp(makaf + " ", 'g'), makaf);
+
+            str = str.replace(/ +/g, ' ')
+
+            return str;
+        }
+
+
         function removeChars(what) {
-						
+
             var str = document.getElementById("myText").value;
-			
-			var onlyQri = 
-				document.getElementById("QriAndKtiv").checked;
-				
+
+            var onlyQri = document.getElementById("QriAndKtiv").checked;
+
             if (onlyQri) {
                 str = removeKtiv(str);
-			}
-			
-			//Word boundaries don't work with none-ascii characters. \\b
-		    //var regexOfOtiotPasuk = "\\b(" + "[א-ת]" + "{1,3})\\b(\\s)";
-		    var regexOfOtiotPasuk = "(?:^|\\s)(" + "[א-ת]" + "{1,3})(\\s)";
-			str = str.replace(new RegExp(regexOfOtiotPasuk, 'g'), " ($1)$2").trim();
-			
-            if (what=="NikudAndTeamim") {
+            }
+
+            //Word boundaries don't work with none-ascii characters. \\b
+            //var regexOfOtiotPasuk = "\\b(" + "[א-ת]" + "{1,3})\\b(\\s)";
+            var regexOfOtiotPasuk = "(?:^|\\s)(" + "[א-ת]" + "{1,3})(\\s)";
+            str = str.replace(new RegExp(regexOfOtiotPasuk, 'g'), " ($1)$2").trim();
+
+            if (what == "NikudAndTeamim") {
                 str = removeNikud(str);
                 str = removeTeamim(str);
-            }
-            else if (what=="Nikud") {
+            } else if (what == "Nikud") {
                 str = removeNikud(str);
-            }
-            else if (what=="Teamim") {
+            } else if (what == "Teamim") {
                 str = removeTeamim(str);
-            }
-            else if (what=="eachVerseInNewLine") {
+            } else if (what == "eachVerseInNewLine") {
                 str = document.getElementById("result").value;
             }
-            str = str.replace(/ +/g,' ')
+            str = str.replace(/ +/g, ' ')
 
-            var eachVerseInNewLine = 
-				document.getElementById("eachVerseInNewLine").checked;
+            var eachVerseInNewLine =
+                document.getElementById("eachVerseInNewLine").checked;
 
             if (eachVerseInNewLine) {
                 str = str.replace(new RegExp(colonSplitter + " ?", 'g'), colonSplitter + "\n").trim();
-            }
-            else{
+            } else {
                 str = str.replace(new RegExp(colonSplitter + "\n", 'g'), colonSplitter + " ").trim();
             }
 
 
             document.getElementById("result").innerHTML = str;
         }
-
     </script>
 
 </body>
+
 </html>
