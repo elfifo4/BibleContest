@@ -50,19 +50,27 @@
     </textarea>
 
     <br/>
-
-    <br/>
     
     <div id="mydiv">
+	
+		<button onclick="removeChars('Copy')">שכפל</button>
+		
         <button onclick="removeChars('Nikud')">הסר ניקוד</button>
             
         <button onclick="removeChars('Teamim')">הסר טעמים</button>
                 
         <button onclick="removeChars('NikudAndTeamim')">הסר ניקוד וטעמים</button>
             
+			<br/>
+			<br/>
         <input type="checkbox" id="eachVerseInNewLine" 
-        checked="checked" onclick='handleClick(this)'>
+        checked="checked" onclick='handleClickEachVerseInNewLine(this)'>
         כל פסוק בשורה חדשה
+		
+					<br/>
+        <input type="checkbox" id="QriAndKtiv" 
+        checked="checked" onclick='handleClickQriAndKtiv(this)'>
+        כאשר יש קרי וכתיב יוצג הקרי בלבד
     </div>
     
     <h2>תוצאה:</h2>
@@ -72,13 +80,18 @@
 
     <script>
 
-function handleClick(cb) {
-    removeChars("eachVerseInNewLine");
-}
+		function handleClickEachVerseInNewLine(cb) {
+			removeChars("eachVerseInNewLine");
+		}
 
-
+		function handleClickQriAndKtiv(cb) {
+			removeChars("Copy");
+		}
+		
         var colonSplitter = "׃";
-
+		var makaf = '־';
+		var alef_tav = "[א-ת]" + "{2,}";
+		
         function removeNikud(str) {
             var nikudChars = '[' + "ְֱֲֳִֵֶַָֹֻּׁׂ" + ']';
             str = str.replace(new RegExp(nikudChars, 'g'), "");
@@ -91,8 +104,52 @@ function handleClick(cb) {
             return str;
         }
 
+		function removeKtiv(str) {
+		    var leftBracket = "\\(", rightBracket = "\\)"; //as characters
+			var noBrackets = "[^()]+";
+			var qri_expression = // for capturing group
+                leftBracket + '(' + noBrackets + ')' + rightBracket;
+				
+			// nun menuzeret	
+			str = str.replace(new RegExp('׆' + "\\s?", 'g'), "");
+			
+			//negative look-behind: matches " word word (qri)" that is not preceded by a colonSplitter
+			str = str.replace(new RegExp("(?<!" + colonSplitter + ')' + "\\s" + alef_tav
+                                + "\\s" + alef_tav + makaf + '?' + "\\s" + qri_expression, 'g'), " " + "$1");
+
+			str = str.replace(new RegExp(makaf + alef_tav + "\\s" + qri_expression, 'g'),
+								makaf + "$1");
+								
+			str = str.replace(new RegExp(alef_tav + makaf + '?' + "\\s" + qri_expression, 'g'),
+								"$1");
+			
+			//qri and not ktiv			
+			str = str.replace(new RegExp(qri_expression, 'g'), "$1");
+						
+			str = str.replace(new RegExp(makaf + " ", 'g'), makaf);
+			
+			str = str.replace(/ +/g,' ')
+
+			return str;
+		}
+		
+	
         function removeChars(what) {
+						
             var str = document.getElementById("myText").value;
+			
+			var onlyQri = 
+				document.getElementById("QriAndKtiv").checked;
+				
+            if (onlyQri) {
+                str = removeKtiv(str);
+			}
+			
+			//Word boundaries don't work with none-ascii characters. \\b
+		    //var regexOfOtiotPasuk = "\\b(" + "[א-ת]" + "{1,3})\\b(\\s)";
+		    var regexOfOtiotPasuk = "(?:^|\\s)(" + "[א-ת]" + "{1,3})(\\s)";
+			str = str.replace(new RegExp(regexOfOtiotPasuk, 'g'), " ($1)$2").trim();
+			
             if (what=="NikudAndTeamim") {
                 str = removeNikud(str);
                 str = removeTeamim(str);
@@ -109,15 +166,15 @@ function handleClick(cb) {
             str = str.replace(/ +/g,' ')
 
             var eachVerseInNewLine = 
-            document.getElementById("eachVerseInNewLine").checked;
+				document.getElementById("eachVerseInNewLine").checked;
 
             if (eachVerseInNewLine) {
                 str = str.replace(new RegExp(colonSplitter + " ?", 'g'), colonSplitter + "\n").trim();
             }
             else{
                 str = str.replace(new RegExp(colonSplitter + "\n", 'g'), colonSplitter + " ").trim();
-
             }
+
 
             document.getElementById("result").innerHTML = str;
         }
