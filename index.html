@@ -67,10 +67,15 @@
         checked="checked" onclick='handleClickEachVerseInNewLine(this)'>
         כל פסוק בשורה חדשה
 		
-					<br/>
+		<br/>
         <input type="checkbox" id="QriAndKtiv" 
         checked="checked" onclick='handleClickQriAndKtiv(this)'>
         כאשר יש קרי וכתיב יוצג הקרי בלבד
+		
+		<br/>
+		<input type="checkbox" id="RemoveOtiotPasuk" >
+        הסר אותיות פסוק
+		
     </div>
     
     <h2>תוצאה:</h2>
@@ -153,10 +158,14 @@
                 str = removeKtiv(str);
 			}
 			
+			var removeOtiotPasuk = 
+				document.getElementById("RemoveOtiotPasuk").checked;
+				
 			//Word boundaries don't work with none-ascii characters. \\b
 		    //var regexOfOtiotPasuk = "\\b(" + "[א-ת]" + "{1,3})\\b(\\s)";
 		    var regexOfOtiotPasuk = "(?:^|\\s)(" + "[א-ת]" + "{1,3})(\\s)";
-			str = str.replace(new RegExp(regexOfOtiotPasuk, 'g'), " ($1)$2").trim();
+			str = str.replace(new RegExp(regexOfOtiotPasuk, 'g'), 
+				removeOtiotPasuk? "" :" ($1)$2").trim();
 			
 			str = removeWhitespacesAndParshiot(str);
 
