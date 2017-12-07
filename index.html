@@ -152,6 +152,8 @@
         function removeChars(what) {
 						
             var str = document.getElementById("myText").value;
+			str = str.replace(/:/g, colonSplitter)
+
 			
 			var onlyQri = 
 				document.getElementById("QriAndKtiv").checked;
