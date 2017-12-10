@@ -28,6 +28,10 @@
             direction:RTL;
             text-align:right;
             padding: 10px;
+            background-image: url(parchment_background.png);
+            background-size: 100% 100%;
+            background-repeat:no-repeat;
+            
         }
         div, h2, h3 {
             direction:RTL;
@@ -121,7 +125,7 @@
 			str = str.replace(new RegExp('׆' + "\\s?", 'g'), "");
 			
 			//negative look-behind: matches " word word (qri)" that is not preceded by a colonSplitter
-			str = str.replace(new RegExp("(?<!" + colonSplitter + ')' + "\\s" + alef_tav
+			str = str.replace(new RegExp("(?<![" + colonSplitter + '}])' + "\\s" + alef_tav
                                 + "\\s" + alef_tav + makaf + '?' + "\\s" + qri_expression, 'g'), " " + "$1");
 
 			str = str.replace(new RegExp(makaf + alef_tav + "\\s" + qri_expression, 'g'),
