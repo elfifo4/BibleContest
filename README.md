@@ -1,6 +1,6 @@
 https://elfifo4.github.io/BibleContest.github.io/
 
-## חידון התנ"ך
+## Bible Contest חידון התנ"ך
 
 ## Welcome to GitHub Pages
 
