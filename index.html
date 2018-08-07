@@ -1,212 +1,72 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="WorldQuiz">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>עיון בתנ"ך</title>
-	<link rel="icon" type="image/png" href="icon.png">
-	  
-    <style>
-        @font-face { font-family: Keter; src: url('KeterYG-Medium.TTF'); } 
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>  Bible Contest </title>
+	<link rel="icon" type="image/png" href="Images/icon.png">
+	
+    <!--Bootstrap and my own desings-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" 
+    integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+    <link rel="stylesheet" href="CSS/style.css">
+    <link rel="stylesheet" 
+        href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" 
+        integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" 
+        crossorigin="anonymous">
 
-        html, body {
-            height: 100%;
-        }
-        html {
-            display: table;
-            margin: auto;
-        }
-        body {
-            font-family: Keter;
-            display: table-cell;
-            vertical-align: middle;
-        }
-        textarea{
-            font-family: Keter;
-            font-size: 20px;
-            direction:RTL;
-            text-align:right;
-            padding: 10px;
-            background-image: url(parchment_background.png);
-            background-size: 100% 100%;
-            background-repeat:no-repeat;
-            
-        }
-        div, h2, h3 {
-            direction:RTL;
-            text-align: center;
-        }
-        button {
-            font-size: 20px;
-        }
-        .text { 
-            width: 100%; 
-            height: 200px 
-        }
-
-    </style>
+        <nav class="navbar navbar-expand-md navbar-dark bg-dark main_nav">
+            <a class="navbar-brand">
+                Bible Contest
+            </a>
+        </nav>
 </head>
 <body>
-    
-    <h2>הכנס פסוקים עם טעמי המקרא</h2>
-    
-    <textarea id="myText" class="text">
-א בְּרֵאשִׁ֖ית בָּרָ֣א אֱלֹהִ֑ים אֵ֥ת הַשָּׁמַ֖יִם וְאֵ֥ת הָאָֽרֶץ׃ ב וְהָאָ֗רֶץ הָֽיְתָ֥ה תֹ֨הוּ֙ וָבֹ֔הוּ וְחֹ֖שֶׁךְ עַל־פְּנֵ֣י תְה֑וֹם וְר֣וּחַ אֱלֹהִ֔ים מְרַחֶ֖פֶת עַל־פְּנֵ֥י הַמָּֽיִם׃ ג וַיֹּ֥אמֶר אֱלֹהִ֖ים יְהִ֣י א֑וֹר וַֽיְהִי־אֽוֹר׃ ד וַיַּ֧רְא אֱלֹהִ֛ים אֶת־הָא֖וֹר כִּי־ט֑וֹב וַיַּבְדֵּ֣ל אֱלֹהִ֔ים בֵּ֥ין הָא֖וֹר וּבֵ֥ין הַחֹֽשֶׁךְ׃ ה וַיִּקְרָ֨א אֱלֹהִ֤ים ׀ לָאוֹר֙ י֔וֹם וְלַחֹ֖שֶׁךְ קָ֣רָא לָ֑יְלָה וַֽיְהִי־עֶ֥רֶב וַֽיְהִי־בֹ֖קֶר י֥וֹם אֶחָֽד׃
-    </textarea>
 
-    <br/>
-    
-    <div id="mydiv">
-	
-		<button onclick="removeChars('Copy')">שכפל</button>
-		
-        <button onclick="removeChars('Nikud')">הסר ניקוד</button>
-            
-        <button onclick="removeChars('Teamim')">הסר טעמים</button>
+<center>
+	<a href="copy_text.html"><h2>העתקת טקסט והסרת ניקוד/טעמים</h2> </a>
+</center>
+
+    <h5 class="results"></h5>
+    <!--Information Landing Page -->
+    <div class="container">
+        <div class="modal-header">
+            <center>
+                <h1 id="title" style="font-size: 400%;"> 
+                <Strong>Bible Contest</Strong> </h1>
+
+                <img src="Images/parchment.svg" 
+                style="width: 10%; height: 10%; margin-left: 30px"/>
+                <img src="Images/hebrew.svg" 
+                style="width: 10%; height: 10%; margin-left: 30px"/>
+                <img src="Images/worldwide.svg" 
+                style="width: 10%; height: 10%; margin-left: 30px"/>
+            </div>
+                <form class="top-buffer"  ng-controller="listController as list">
+                        <label><strong><h3>Shuffle Questions</h3></strong></label>
+                        <input type="checkbox" class="shuffle"> 
+                </form>
                 
-        <button onclick="removeChars('NikudAndTeamim')">הסר ניקוד וטעמים</button>
-            
-			<br/>
-			<br/>
-        <input type="checkbox" id="eachVerseInNewLine" 
-        checked="checked" onclick='handleClickEachVerseInNewLine(this)'>
-        כל פסוק בשורה חדשה
-		
-		<br/>
-        <input type="checkbox" id="QriAndKtiv" 
-        checked="checked" onclick='handleClickQriAndKtiv(this)'>
-        כאשר יש קרי וכתיב יוצג הקרי בלבד
-		
-		<br/>
-		<input type="checkbox" id="RemoveOtiotPasuk" >
-        הסר אותיות פסוק
-		
+                <button class="home btn btn-primary" id="btnHome">Home</button>
+
+            </center>
     </div>
-    
-    <h2>תוצאה:</h2>
-    
-    <textarea id="result" class="text"></textarea>
+  
+            <table id="dynamicMenu" class="menuHolder">
 
+            </table>
 
-    <script>
+    <!-- Javascript Stuff -->
+   
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" 
+    integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" 
+    crossorigin="anonymous"></script>
 
-		function handleClickEachVerseInNewLine(cb) {
-			removeChars("eachVerseInNewLine");
-		}
-
-		function handleClickQriAndKtiv(cb) {
-			removeChars("Copy");
-		}
-		
-        var colonSplitter = "׃";
-		var makaf = '־';
-		var alef_tav = "[א-ת]" + "{2,}";
-		
-        function removeNikud(str) {
-            var nikudChars = '[' + "ְֱֲֳִֵֶַָֹֻּׁׂ" + ']';
-            str = str.replace(new RegExp(nikudChars, 'g'), "");
-            return str;
-        }
-
-        function removeTeamim(str) {
-            var teamimChars = '[' + "ֽ֪֑֧֖֪֥֭֚֮֨֜֝֕֔ׄ֒֫֬֡׀֣֤֛֦ׅ֘֙֟֗֓֞֠֩׆" + ']';
-            str = str.replace(new RegExp(teamimChars, 'g'), "");
-            return str;
-        }
-
-		function removeKtiv(str) {
-		    var leftBracket = "\\(", rightBracket = "\\)"; //as characters
-			var noBrackets = "[^()]+";
-			var qri_expression = // for capturing group
-                leftBracket + '(' + noBrackets + ')' + rightBracket;
-				
-			// nun menuzeret	
-			str = str.replace(new RegExp('׆' + "\\s?", 'g'), "");
-			
-			//negative look-behind: matches " word word (qri)" that is not preceded by a colonSplitter
-			str = str.replace(new RegExp("(?<![" + colonSplitter + '}])' + "\\s" + alef_tav
-                                + "\\s" + alef_tav + makaf + '?' + "\\s" + qri_expression, 'g'), " " + "$1");
-
-			str = str.replace(new RegExp(makaf + alef_tav + "\\s" + qri_expression, 'g'),
-								makaf + "$1");
-								
-			str = str.replace(new RegExp(alef_tav + makaf + '?' + "\\s" + qri_expression, 'g'),
-								"$1");
-			
-			//qri and not ktiv			
-			str = str.replace(new RegExp(qri_expression, 'g'), "$1");
-						
-			str = str.replace(new RegExp(makaf + " ", 'g'), makaf);
-			
-			str = str.replace(/ +/g,' ')
-
-			return str;
-		}
-		
-		function removeWhitespacesAndParshiot(str) {
-			str = str.replace(new RegExp("\\{.+?\\}", 'g'), "");
-			str = str.replace(new RegExp("([\\r\\n])", 'g'), " ");
-			str = str.replace(new RegExp(" +", 'g'), " ");
-			var mysteryCharZWJ = String.fromCharCode(8205);
-			str = str.replace(new RegExp(mysteryCharZWJ, 'g'), "");
-			return str;
-		}
-		
-        function removeChars(what) {
-						
-            var str = document.getElementById("myText").value;
-			str = str.replace(/:/g, colonSplitter)
-
-			
-			var onlyQri = 
-				document.getElementById("QriAndKtiv").checked;
-				
-            if (onlyQri) {
-                str = removeKtiv(str);
-			}
-			
-			var removeOtiotPasuk = 
-				document.getElementById("RemoveOtiotPasuk").checked;
-				
-			//Word boundaries don't work with none-ascii characters. \\b
-		    //var regexOfOtiotPasuk = "\\b(" + "[א-ת]" + "{1,3})\\b(\\s)";
-		    var regexOfOtiotPasuk = "(?:^|\\s)(" + "[א-ת]" + "{1,3})(\\s)";
-			str = str.replace(new RegExp(regexOfOtiotPasuk, 'g'), 
-				removeOtiotPasuk? "" :" ($1)$2").trim();
-			
-			str = removeWhitespacesAndParshiot(str);
-
-            if (what=="NikudAndTeamim") {
-                str = removeNikud(str);
-                str = removeTeamim(str);
-            }
-            else if (what=="Nikud") {
-                str = removeNikud(str);
-            }
-            else if (what=="Teamim") {
-                str = removeTeamim(str);
-            }
-            else if (what=="eachVerseInNewLine") {
-                str = document.getElementById("result").value;
-            }
-            str = str.replace(/ +/g,' ')
-
-            var eachVerseInNewLine = 
-				document.getElementById("eachVerseInNewLine").checked;
-
-            if (eachVerseInNewLine) {
-                str = str.replace(new RegExp(colonSplitter + " ?", 'g'), colonSplitter + "\n").trim();
-            }
-            else{
-                str = str.replace(new RegExp(colonSplitter + "\n", 'g'), colonSplitter + " ").trim();
-            }
-
-
-            document.getElementById("result").innerHTML = str;
-        }
-
-    </script>
-
+    <!-- Application Scripts -->
+    <script src="Javascript/controllers/list.js"></script>
+    <script src ="Javascript/nav.js"></script>
 </body>
 </html>
+
+ 
