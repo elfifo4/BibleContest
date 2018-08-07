@@ -1,0 +1,217 @@
+@font-face {
+    font-family: "Keter YG";
+    src: url("../Fonts/KeterYGMedium.ttf");
+}
+
+.img_size{
+    height: 150px;
+    width: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 5%;
+}
+.modular_img_size{
+   height: 400%;
+   width: 400%;
+
+}
+.centro{
+    align-items: center;
+}
+.start_quiz{
+    margin-bottom:0.5%;
+    margin-top: 1%;
+}
+.btn_long{
+    width: 25%;
+    height: 40px;
+}
+.form_centre{
+    width: 50%;
+    margin: 0 auto;
+    margin-bottom: 1%;
+    margin-top: 1%;
+}
+.level_centre{
+    width: 55%;
+    margin: 0 auto;
+    margin-top: 1%;
+}
+.align_text_center{
+    text-align: center;
+}
+
+.img_answer{
+    padding: 15px 20px;
+    border-radius: 10px;
+    border: 1px solid gray;
+    height: 100%;
+    width: 100%;
+}
+.img_top{
+    border-radius: 10px;
+    height: 25%;
+    width: 25%;
+}
+.img_answer:hover{
+cursor: pointer;
+}
+.image_selected{
+border: 3px solid #56afdc;
+}
+.image_correct{
+    border: 3px solid #28A745;
+}
+.image_incorrect{
+    border: 3px solid #DC3545;
+}
+.answer{
+    padding: 15px 20px;
+    border-radius: 10px;
+    border: 1px solid gray;
+}
+.answer:hover{
+    cursor: pointer;
+}
+.topic{
+    width: 60%;
+    margin: auto;
+}
+.topic_title{
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+    margin-right: 50%;
+    font-size: 2.5vw !important;
+}
+.answer_title{
+    position: relative;
+    padding-bottom: 50px;
+    top: 100px;
+    transform: translateY(-50%);
+    margin-right: 50%;
+    font-size: 1.7vw !important;
+}
+.main_nav{
+    border-radius: 0px !important;
+    width: 100%;
+    background-color: #795547 !important;
+    color           : white   !important;
+}
+
+body{
+        overflow-x: hidden;
+        overflow-y: scroll;
+        padding-bottom: 60px;
+        background: #B49664 url("../Images/parchment2.jpg") !important;
+        background-repeat: repeat !important;
+
+        font-family: 'Keter YG', Arial, sans-serif !important;
+        font-weight:normal;
+        font-style:normal;
+    }
+
+.top-buffer{
+    margin-top: 15px;
+}
+
+.question{
+    cursor:pointer;
+    width: 100%;
+    margin: auto;
+    left: 0;
+    right: 0;
+    text-align: center;
+}
+
+.parchment{
+    background: url(http://www.clker.com/cliparts/8/1/f/4/1197149704400806700Gerald_G_Parchment_Background_or_Border_2.svg.hi.png) center !important;
+    background-size: 900px 332px !important;
+    background-repeat: no-repeat !important;
+}
+
+.home{
+    background-color: #795547 !important;
+    color: white !important;
+}
+
+.well{
+    background: url("../Images/background.jpg") !important;
+    box-shadow: 10px 10px  #421605 !important;
+    padding: 10px;
+}
+
+.questionBox{
+    width: 40vw !important;
+}
+
+table{
+    left: 0;
+    right: 0;
+    margin: auto;
+    width: 100%;
+}
+
+.menuItem{
+    width: 95.5vw !important;
+    margin: auto;
+    left: 0;
+    right: 0;
+    text-align: center;
+}
+
+.menuButton{
+    background-color: #795547 !important;
+    color: white !important;
+}
+
+.questionList{
+    text-align: center;
+    display: inline-block;
+}
+
+.menuHolder{
+    margin: auto;
+    left: 0;
+    right: 0;
+    text-align: center;
+    width: 15.5vw !important;
+}
+
+.container{
+    width: 55.5vw !important;
+}
+
+h3{
+    font-size: 1.5vw !important;
+}
+
+.ripple {
+    position: relative;
+    overflow: hidden;
+    transform: translate3d(0, 0, 0);
+  }
+  
+  .ripple:after {
+    content: "";
+    display: block;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    background-image: radial-gradient(circle, #fff 10%, transparent 10.01%);
+    background-repeat: no-repeat;
+    background-position: 50%;
+    transform: scale(10, 10);
+    opacity: 0;
+    transition: transform .5s, opacity 1s;
+  }
+  
+  .ripple:active:after {
+    transform: scale(0, 0);
+    opacity: .3;
+    transition: 0s;
+  }
