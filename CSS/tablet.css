@@ -14,10 +14,6 @@
     display:none;
 }
 
-.questionsTitle{
-    font-size: 50px !important;
-}
-
 .shuffle{
     font-size: 40px !important;
 }
@@ -29,6 +25,11 @@
     justify-content: center;
     margin-top: 5%;
 }
+
+.mainTitle{
+    font-size:400%;
+}
+
 .modular_img_size{
    height: 400%;
    width: 400%;
@@ -112,11 +113,12 @@ border: 3px solid #56afdc;
     color           : white   !important;
 }
 
+
 body{
         overflow-x: hidden;
         overflow-y: scroll;
         padding-bottom: 60px;
-        background: #B49664 url("../Images/parchment2.jpg") !important;
+        background: #B49664 url("../Images/parchment2.jpg") !important;       
         background-repeat: repeat !important;
 
         font-family: 'Keter YG', Arial, sans-serif !important;
@@ -126,10 +128,6 @@ body{
 
 .top-buffer{
     margin-top: 15px;
-}
-
-#indexTitle{
-    font-size: 400%;
 }
 
 .question{
@@ -150,10 +148,13 @@ body{
 .home{
     background-color: #795547 !important;
     color: white !important;
+    width: 100px;
+    height: 50px;
+    font-size: 20px !important;
 }
 
 .well{
-    background: url("../Images/background.jpg") !important;
+    background: url("../Images/background.jpg") !important;    
     box-shadow: 10px 10px  #421605 !important;
     padding: 10px;
 }
@@ -201,13 +202,17 @@ table{
 }
 
 .container{
-    width: 55.5vw !important;
+    width: 70.5vw !important;
 }
 
 h3{
     font-size: 1.5vw !important;
 }
-
+#title{
+    font-size: 50px;
+    overflow: hidden;
+    white-space: nowrap;
+}
 
   /* -------- Q and A ---------------*/
 
@@ -249,7 +254,7 @@ h3{
 /* Questions and Answers Important */
 
 .questionBox{
-    width: 40vw !important;
+    width: 65vw !important;
 }
 
 .answer_index{
@@ -257,15 +262,15 @@ h3{
     padding: 15px;
     top: 0px;
     right: 0px;
-    font-size: 28px !important;
+    font-size: 25px !important;
 }
 
 .answer_question{
     position: relative;
-    margin-top: 4vw;
+    margin-top: 10vw;
     transform: translateY(-50%);
     font-size: 50px !important;
-   
+    
 }
 .answer_title{
     position: relative;
@@ -274,3 +279,4 @@ h3{
     transform: translateY(-50%);
     font-size: 30px !important;
 }
+

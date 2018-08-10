@@ -3,23 +3,27 @@
     src:url("../Fonts/Keter\ YG\ Medium.ttf")
 }
 
-.phoneContainer{
-    display: none;
-}
-#phoneTitle{
-    display: none;
+.mainContainer{
+    display: none !important;
 }
 
-.phoneQuestions{
+#title{
+    display: none !important;
+}
+
+#phoneTitle{
+    font-size: 40px;
+    overflow: hidden;
+    white-space: nowrap;
+}
+.mainHeader{
     display:none;
 }
 
-.questionsTitle{
-    font-size: 50px !important;
-}
 
 .shuffle{
-    font-size: 40px !important;
+    font-size: 25px !important;
+    margin-left: 10px;
 }
 .img_size{
     height: 150px;
@@ -95,14 +99,16 @@ border: 3px solid #56afdc;
     cursor: pointer;
 }
 .topic{
-    width: 60%;
+    width: 90%;
     margin: auto;
 }
 .topic_title{
     position: relative;
     top: 40%;
     transform: translateY(-50%);
-    font-size: 50px !important;
+    font-size: 30px !important;
+    overflow: hidden;
+    white-space: nowrap;
 }
 
 .main_nav{
@@ -116,7 +122,7 @@ body{
         overflow-x: hidden;
         overflow-y: scroll;
         padding-bottom: 60px;
-        background: #B49664 url("../Images/parchment2.jpg") !important;
+        background: #B49664 url("../Images/parchment2.jpg") !important;        
         background-repeat: repeat !important;
 
         font-family: 'Keter YG', Arial, sans-serif !important;
@@ -126,10 +132,6 @@ body{
 
 .top-buffer{
     margin-top: 15px;
-}
-
-#indexTitle{
-    font-size: 400%;
 }
 
 .question{
@@ -150,6 +152,10 @@ body{
 .home{
     background-color: #795547 !important;
     color: white !important;
+    width: 75px;
+    height: 40px;
+    font-size: 15px !important;
+    margin-left:10px !important;
 }
 
 .well{
@@ -188,7 +194,7 @@ table{
     color: white !important;
     width:150px;
     height:50px;
-    font-size: 150% !important;
+    font-size: 120% !important;
 }
 
 
@@ -206,6 +212,12 @@ table{
 
 h3{
     font-size: 1.5vw !important;
+}
+
+#indexTitle{
+    font-size: 40px;
+    overflow: hidden;
+    white-space: nowrap;
 }
 
 
@@ -249,7 +261,10 @@ h3{
 /* Questions and Answers Important */
 
 .questionBox{
-    width: 40vw !important;
+    width: 95.5vw !important;
+    margin: auto;
+    left: 0;
+    right: 0;
 }
 
 .answer_index{
@@ -257,20 +272,19 @@ h3{
     padding: 15px;
     top: 0px;
     right: 0px;
-    font-size: 28px !important;
+    font-size: 20px !important;
 }
 
 .answer_question{
     position: relative;
-    margin-top: 4vw;
+    margin-top: 10vw;
     transform: translateY(-50%);
-    font-size: 50px !important;
-   
+    font-size: 30px !important;
 }
 .answer_title{
     position: relative;
     padding-bottom: 5%;
     top: 4vw;
     transform: translateY(-50%);
-    font-size: 30px !important;
+    font-size: 20px !important;
 }
