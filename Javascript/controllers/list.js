@@ -8,6 +8,12 @@ var spreadsheetID = "1l2ZqkbAT-y8lbkHtlnINBz_kl2wYnqQ-arxhlI1JnuI";
 var topics = []; 
 var mainUrl = "https://spreadsheets.google.com/feeds/list/1l2ZqkbAT-y8lbkHtlnINBz_kl2wYnqQ-arxhlI1JnuI/1/public/values?alt=json";
 
+//for each element that is classed as 'pull-down', set its margin-top to the difference between its own height and the height of its parent
+$('.pull-down').each(function() {
+  var $this = $(this);
+  $this.css('margin-top', $this.parent().height() - $this.height())
+});
+
 $(".home").click(()=>{
     location.reload();
 });
@@ -40,16 +46,9 @@ if( !window.location.href.includes("question")){
 
 var menuHTML     = [];
 $(topics).each(function(index){
-  var menuItem = '<p><div class="menuItem" style="margin-top: 15px">'
-  + ' <div class="row"><div class ="topic">'
-  + ' <div class="well" style="background-color: #CDAF8B !important;">'
-  + ' <div class="row"><div class="col-md-6" ></div>'
-  + '<div class="container"><h4 class="topic_title">'
-  + topics[index].title 
-  + '</h4><button class="btn btn-primary pull-right menuButton" id="btn-'
-  + index 
-  + '">Show Quiz</button></div></div></div><br></div></p>'
+  var menuItem = '<p><div class="menuItem" style="margin-top: 15px"> <div class="row"><div class ="topic"> <div class="well" style="background-color: #CDAF8B !important;"> <div class="row"><div class="centre"><h4 class="topic_title">'+ topics[index].title +'</h4><div class="btnContainer"><button class="btn menuButton" id="btn-'+ index +'">  Learn More  </button></div></div></div></div><br></div></p>'
   $("#btnHome").hide();  
+  $("#btnHomePhone").hide();  
   menuHTML.push(menuItem);
 });
 $('#dynamicMenu').html(menuHTML);
@@ -92,7 +91,7 @@ function loadQuestions(topic, random){
     var the_arr = location.split('/');
     the_arr.pop();
     var formatted = (the_arr.join('/')+"/");
-    window.location = formatted+"index.html"; //open_questions
+    window.location = formatted+"index.html";
   });
 
   var topic  = getUrlParameter('topic');
@@ -117,6 +116,7 @@ function loadQuestions(topic, random){
 
   function setTitle(topic){
     $('#title').html(topics[topic].title);
+    $('#phoneTitle').html(topics[topic].title);
   }
 
   function setQuestions(topic, random){
@@ -128,16 +128,25 @@ function loadQuestions(topic, random){
 
   function randomQuestions(topic){
     var questionHTML = [];
+    var normalArr    = [];
     $(topics).each(function(index){
       if(index == topic){
         $(topics[index].questions).each(function(questionIndex){
-          var newItem = '<div class="questionList"><div class="question" id="question:'+ topics[index].id +"|"+ questionIndex +'"><div class="row"><div> <div class="well questionBox ripple" style="background-color: #CDAF8B !important;"> <div class="row"><div class="container" style="margin-left: 32%;"> <h4 class="topic_title">' + topics[index].questions[questionIndex].country + '</h4><h4 class="answer_title"id="answer-'+ topics[index].id +"|"+ questionIndex +'" hidden >' + topics[index].questions[questionIndex].city + '</h4></div></div></div><br></div></div></div></div><br id="answer-'+ topics[index].id +"|"+ questionIndex +'" hidden><br id="answer-'+ topics[index].id +"|"+ questionIndex +'" hidden><br id="answer-'+ topics[index].id +"|"+ questionIndex +'" hidden>'  ;
-        questionHTML.push(newItem);
+          var dataItem = {"divQuestionId":topics[index].id +"|"+ questionIndex, "questionNumber":0, "question":topics[index].questions[questionIndex].country, "answer":topics[index].questions[questionIndex].city};
+        questionHTML.push(dataItem);
         });
       }
   });
   var randomHTML = shuffle(questionHTML);
-  $('#dynamicQuestions').html(randomHTML);
+  var sortedHTML = [];
+  $(randomHTML).each(function(index){
+    randomHTML[index].questionNumber = index+1;
+    var newItem = '<div class="questionList"><div class="question" id="question:'+ randomHTML[index].divQuestionId +'"><div class="row"><div> <div class="well questionBox ripple" style="background-color: #CDAF8B !important;"> <div class="row"> <h4 class="pull-right answer_index"> ('+ randomHTML[index].questionNumber +') </h4> <div class="container"> <h4 class="answer_question">' + randomHTML[index].question + '</h4><h4 class="answer_title"id="answer-'+ randomHTML[index].divQuestionId +'" hidden >' + randomHTML[index].answer + '</h4></div></div></div><br></div></div></div></div>';                 
+    sortedHTML.push(newItem);
+  });
+
+  $('#phoneDynamicQuestions').html(sortedHTML);
+  $('#dynamicQuestions').html(sortedHTML);
   }
 
   function questions(topic){
@@ -145,11 +154,12 @@ function loadQuestions(topic, random){
     $(topics).each(function(index){
     if(index == topic){
       $(topics[index].questions).each(function(questionIndex){
-      var newItem = '<div class="questionList"><div class="question" id="question:'+ topics[index].id +"|"+ questionIndex +'"><div class="row"><div> <div class="well questionBox ripple" style="background-color: #CDAF8B !important;"> <div class="row"><div class="container" style="margin-left: 32%;"> <h4 class="topic_title">' + topics[index].questions[questionIndex].country + '</h4><h4 class="answer_title"id="answer-'+ topics[index].id +"|"+ questionIndex +'" hidden >' + topics[index].questions[questionIndex].city + '</h4></div></div></div><br></div></div></div></div><br id="answer-'+ topics[index].id +"|"+ questionIndex +'" hidden><br id="answer-'+ topics[index].id +"|"+ questionIndex +'" hidden><br id="answer-'+ topics[index].id +"|"+ questionIndex +'" hidden>'  ;
+      var newItem = '<div class="questionList"><div class="question" id="question:'+ topics[index].id +"|"+ questionIndex +'"><div class="row"><div> <div class="well questionBox ripple" style="background-color: #CDAF8B !important;"> <div class="row"> <h4 class="pull-right answer_index"> ('+ (questionIndex+1) +') </h4> <div class="container"> <h4 class="answer_question">' + topics[index].questions[questionIndex].country + '</h4><h4 class="answer_title"id="answer-'+ topics[index].id +"|"+ questionIndex +'" hidden >' + topics[index].questions[questionIndex].city + '</h4></div></div></div><br></div></div></div></div>';
       questionHTML.push(newItem);
       });
     }
   });
+  $('#phoneDynamicQuestions').html(questionHTML);
   $('#dynamicQuestions').html(questionHTML);
   }
 

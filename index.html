@@ -4,47 +4,51 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>  Bible Contest </title>
-	<link rel="icon" type="image/png" href="Images/icon.png">
-	
+
     <!--Bootstrap and my own desings-->
+    <meta name="HandheldFriendly" content="true" />
+    <meta name="MobileOptimized" content="320" />
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, width=device-width, user-scalable=no" />
+
+    <!-- smart phone css  -->
+    <link href="CSS/phone.css" rel="stylesheet" type="text/css" media="all and (min-width: 0px) and (max-width: 480px)" />
+
+    <!-- Tablet -->
+    <link href="CSS/tablet.css" rel="stylesheet" type="text/css" media="all and (min-width: 481px) and (max-width: 800px)" />
+
+    <!-- Desktop -->
+    <link href="CSS/style.css" rel="stylesheet" type="text/css" media="only screen and (min-width:801px)">
+
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" 
     integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
-    <link rel="stylesheet" href="CSS/style.css">
     <link rel="stylesheet" 
         href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" 
         integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" 
         crossorigin="anonymous">
-
-        <nav class="navbar navbar-expand-md navbar-dark bg-dark main_nav">
-            <a class="navbar-brand">
-                Bible Contest
-            </a>
-        </nav>
 </head>
+<nav class="navbar navbar-expand-md main_nav">
+    <a class="navbar-brand">
+        Bible Contest
+    </a>
+</nav>
 <body>
-
-<center>
-		<!--העתקת טקסט והסרת ניקוד/טעמים-->
-	<a href="copy_text.html"><h2>Text to copy</h2> </a>
-</center>
-
     <h5 class="results"></h5>
     <!--Information Landing Page -->
-    <div class="container">
+    <div class="container mainContainer">
         <div class="modal-header">
             <center>
-                <h1 id="title" style="font-size: 400%;"> 
+                <h1 id="indexTitle" class="mainTitle"> 
                 <Strong>Bible Contest</Strong> </h1>
 
                 <img src="Images/parchment.svg" 
-                style="width: 10%; height: 10%; margin-left: 30px"/>
+                style="width: 10%; height: 10%; margin-left: 30px"></img>
                 <img src="Images/hebrew.svg" 
-                style="width: 10%; height: 10%; margin-left: 30px"/>
+                style="width: 10%; height: 10%; margin-left: 30px"></img>
                 <img src="Images/worldwide.svg" 
-                style="width: 10%; height: 10%; margin-left: 30px"/>
+                style="width: 10%; height: 10%; margin-left: 30px"></img>
             </div>
-                <form class="top-buffer"  ng-controller="listController as list">
-                        <label><strong><h3>Shuffle Questions</h3></strong></label>
+                <form class="top-buffer">
+                        <label><strong><h3 class="shuffle">Shuffle Questions</h3></strong></label>
                         <input type="checkbox" class="shuffle"> 
                 </form>
                 
@@ -52,7 +56,30 @@
 
             </center>
     </div>
-  
+
+    <div class="phoneContainer">
+            <div class="modal-header">
+                <center>
+                    <h1 id="indexTitle" class="mainTitle"> 
+                    <Strong>Bible Contest</Strong> </h1>
+    
+                    <img src="Images/parchment.svg" 
+                    style="width: 10%; height: 10%; margin-left: 30px"></img>
+                    <img src="Images/hebrew.svg" 
+                    style="width: 10%; height: 10%; margin-left: 30px"></img>
+                    <img src="Images/worldwide.svg" 
+                    style="width: 10%; height: 10%; margin-left: 30px"></img>
+                </div>
+                    <form class="top-buffer">
+                            <label><strong><h3 class="shuffle">Shuffle Questions</h3></strong></label>
+                            <input type="checkbox" class="shuffle"> 
+                    </form>
+                    
+                    <button class="home btn btn-primary" id="btnHomePhone">Home</button>
+    
+                </center>
+        </div>
+    
             <table id="dynamicMenu" class="menuHolder">
 
             </table>
