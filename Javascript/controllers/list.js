@@ -6,6 +6,7 @@
 var spreadsheetID = "1l2ZqkbAT-y8lbkHtlnINBz_kl2wYnqQ-arxhlI1JnuI";
 
 var topics = []; 
+var globalHTML = [];
 var mainUrl = "https://spreadsheets.google.com/feeds/list/1l2ZqkbAT-y8lbkHtlnINBz_kl2wYnqQ-arxhlI1JnuI/1/public/values?alt=json";
 
 //for each element that is classed as 'pull-down', set its margin-top to the difference between its own height and the height of its parent
@@ -46,7 +47,7 @@ if( !window.location.href.includes("question")){
 
 var menuHTML     = [];
 $(topics).each(function(index){
-  var menuItem = '<p><div class="menuItem" style="margin-top: 15px"> <div class="row"><div class ="topic"> <div class="well" style="background-color: #CDAF8B !important;"> <div class="row"><div class="centre"><h4 class="topic_title">'+ topics[index].title +'</h4><div class="btnContainer"><button class="btn menuButton" id="btn-'+ index +'">  Learn More  </button></div></div></div></div><br></div></p>'
+  var menuItem = '<p><div class="menuItem" style="margin-top: 15px"> <div class="row"><div class ="topic"> <div class="well" style="background-color: #CDAF8B !important;"> <div class="row"><h4 class="menu_index"> ('+ (index+1) +') </h4><div class="centre"><h4 class="topic_title">'+ topics[index].title +'</h4><div class="btnContainer"><button class="btn menuButton" id="btn-'+ index +'">  Learn More  </button></div></div></div></div><br></div></p>'
   $("#btnHome").hide();  
   $("#btnHomePhone").hide();  
   menuHTML.push(menuItem);
@@ -128,7 +129,7 @@ function loadQuestions(topic, random){
 
   function randomQuestions(topic){
     var questionHTML = [];
-    var normalArr    = [];
+    globalHTML = [];
     $(topics).each(function(index){
       if(index == topic){
         $(topics[index].questions).each(function(questionIndex){
@@ -141,26 +142,29 @@ function loadQuestions(topic, random){
   var sortedHTML = [];
   $(randomHTML).each(function(index){
     randomHTML[index].questionNumber = index+1;
-    var newItem = '<div class="questionList"><div class="question" id="question:'+ randomHTML[index].divQuestionId +'"><div class="row"><div> <div class="well questionBox ripple" style="background-color: #CDAF8B !important;"> <div class="row"> <h4 class="pull-right answer_index"> ('+ randomHTML[index].questionNumber +') </h4> <div class="container"> <h4 class="answer_question">' + randomHTML[index].question + '</h4><h4 class="answer_title"id="answer-'+ randomHTML[index].divQuestionId +'" hidden >' + randomHTML[index].answer + '</h4></div></div></div><br></div></div></div></div>';                 
+    var newItem = '<div class="questionList hvr-float"><div class="question" id="question:'+ randomHTML[index].divQuestionId +'"><div class="row"><div> <div class="well questionBox ripple" style="background-color: #CDAF8B !important;"> <div class="row"> <h4 class="pull-left answer_index"> ('+ randomHTML[index].questionNumber +') </h4> <i class="far fa-copy copy" id="copy:'+ randomHTML[index].divQuestionId +'"></i> <div class="container"> <h4 class="answer_question" id="question-'+ randomHTML[index].divQuestionId +'">' + randomHTML[index].question + '</h4><h4 class="answer_title"id="answer-'+ randomHTML[index].divQuestionId +'" hidden >' + randomHTML[index].answer + '</h4></div></div></div><br></div></div></div></div>';                 
     sortedHTML.push(newItem);
   });
 
   $('#phoneDynamicQuestions').html(sortedHTML);
   $('#dynamicQuestions').html(sortedHTML);
+  globalHTML = sortedHTML;
   }
 
   function questions(topic){
     var questionHTML = [];
+    globalHTML = [];
     $(topics).each(function(index){
     if(index == topic){
       $(topics[index].questions).each(function(questionIndex){
-      var newItem = '<div class="questionList"><div class="question" id="question:'+ topics[index].id +"|"+ questionIndex +'"><div class="row"><div> <div class="well questionBox ripple" style="background-color: #CDAF8B !important;"> <div class="row"> <h4 class="pull-right answer_index"> ('+ (questionIndex+1) +') </h4> <div class="container"> <h4 class="answer_question">' + topics[index].questions[questionIndex].country + '</h4><h4 class="answer_title"id="answer-'+ topics[index].id +"|"+ questionIndex +'" hidden >' + topics[index].questions[questionIndex].city + '</h4></div></div></div><br></div></div></div></div>';
+      var newItem = '<div class="questionList hvr-float"><div class="question" id="question:'+ topics[index].id +"|"+ questionIndex +'"><div class="row"><div> <div class="well questionBox ripple" style="background-color: #CDAF8B !important;"> <div class="row"> <h4 class="pull-left answer_index"> ('+ (questionIndex+1) +') </h4> <i class="far fa-copy copy" id="copy:'+ topics[index].id +"|"+ questionIndex +'"></i> <div class="container"> <h4 class="answer_question" id="question-'+ topics[index].id +"|"+ questionIndex +'">' + topics[index].questions[questionIndex].country + '</h4><h4 class="answer_title"id="answer-'+ topics[index].id +"|"+ questionIndex +'" hidden >' + topics[index].questions[questionIndex].city + '</h4></div></div></div><br></div></div></div></div>';
       questionHTML.push(newItem);
       });
     }
   });
   $('#phoneDynamicQuestions').html(questionHTML);
   $('#dynamicQuestions').html(questionHTML);
+  globalHTML = questionHTML;
   }
 
   function addQuestions(topic){

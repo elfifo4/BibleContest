@@ -18,7 +18,13 @@
     
         <!-- Desktop -->
         <link href="CSS/style.css" rel="stylesheet" type="text/css" media="only screen and (min-width:801px)">
+
+        <!-- Icons -->
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
     
+        <!-- Effects -->
+        <link href="CSS/hover.css" rel="stylesheet" media="only screen and (min-width:801px)">
+
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" 
         integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
         <link rel="stylesheet" 
@@ -34,6 +40,7 @@
 <body>
     <!-- /////////////////////////////////// -->
     <div class="mainQuestions">
+    <div id="snackbar">Copied to Clipboard</div>
     <h5 class="results"></h5>
     <!--Information Landing Page -->
     <div class="container mainHeader">
@@ -47,6 +54,8 @@
 
     <button class="home btn btn-primary top-buffer" id="btnHome">Home</button>
   
+    <br>
+    <br>
     <table id="dynamicQuestions" class="menuHolder">
 
     </table>
@@ -54,7 +63,7 @@
     </div>
 </div>
 
-    <div class="phoneQuestions">
+    <div class="phoneQuestions top-buffer">
         <h5 class="results"></h5>
         <!--Information Landing Page -->
        
@@ -70,6 +79,8 @@
     
         <button class="home btn btn-primary top-buffer" id="btnHomePhone">Home</button>
       
+        <br>
+        <br>
         <table id="phoneDynamicQuestions" class="menuHolder">
     
         </table>
