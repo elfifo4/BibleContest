@@ -348,3 +348,35 @@ However, delay the fade out process for 2.5 seconds */
     from {bottom: 30px; opacity: 1;}
     to {bottom: 0; opacity: 0;}
 }
+
+.effect {
+    transition: all 0.2s linear 0s;
+    color: #fff;
+  }
+  .effect:before {
+    font-family: FontAwesome;
+    content: "\f054";
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    height: 100%;
+    width: 30px;
+    border-radius: 0 50% 50% 0;
+    transform: scale(0, 1);
+    
+    transition: all 0.2s linear 0s;
+    display: block;
+    max-width: 100%;
+    text-align: center;
+    margin: 0 auto;
+    background-color: rgba(#fff,0.3);
+  }
+  .effect:hover {
+    text-indent: 30px;
+  }
+  .effect:hover:before {
+    transform: scale(1, 1);
+    text-indent: 0;
+  }
+  

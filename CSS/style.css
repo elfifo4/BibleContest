@@ -152,13 +152,6 @@ body{
     color: white !important;
 }
 
-.well{
-    background: url("../Images/background.jpg") !important;
-    box-shadow: 10px 10px  #421605 !important;
-    padding: 10px;
-}
-
-
 table{
     left: 0;
     right: 0;
@@ -186,7 +179,7 @@ table{
 .menuButton{
     background-color: #795547 !important;
     color: white !important;
-    width:150px;
+    width:170px;
     height:50px;
     font-size: 150% !important;
 }
@@ -231,12 +224,12 @@ h3{
     top: 0;
     left: 0;
     pointer-events: none;
-    background-image: radial-gradient(circle, #fff 10%, transparent 8.01%);
+    background-image: radial-gradient(circle, #fff 20%, transparent 8.01%);
     background-repeat: no-repeat;
     background-position: 50%;
     transform: scale(10, 10);
     opacity: 0;
-    transition: transform 0.7s, opacity 2s;
+    transition: transform 1s, opacity 2s;
   }
   
   .ripple:active:after {
@@ -253,6 +246,17 @@ h3{
 
 .questionBox{
     width: 40vw !important;
+}
+
+.well{
+    background: url("../Images/background.jpg");
+    box-shadow: 10px 10px  #421605 !important;
+    padding: 10px;
+}
+.questionBox.well:hover {
+    background:
+    linear-gradient(0deg, rgba(133, 91, 49, 0.52), rgba(133, 91, 49, 0.52)),
+    url("../Images/background.jpg");
 }
 
 .answer_index{
@@ -352,3 +356,35 @@ However, delay the fade out process for 2.5 seconds */
   .hvr-float:hover{
     transform: translateY(-8px);
   }
+
+  .effect {
+    transition: all 0.2s linear 0s;
+    color: #fff;
+  }
+  .effect:before {
+    font-family: FontAwesome;
+    content: "\f054";
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    height: 100%;
+    width: 30px;
+    border-radius: 0 50% 50% 0;
+    transform: scale(0, 1);
+    
+    transition: all 0.2s linear 0s;
+    display: block;
+    max-width: 100%;
+    text-align: center;
+    margin: 0 auto;
+    background-color: rgba(#fff,0.3);
+  }
+  .effect:hover {
+    text-indent: 30px;
+  }
+  .effect:hover:before {
+    transform: scale(1, 1);
+    text-indent: 0;
+  }
+  
