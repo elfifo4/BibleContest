@@ -47,7 +47,7 @@ if( !window.location.href.includes("question")){
 
 var menuHTML     = [];
 $(topics).each(function(index){
-  var menuItem = '<p><div class="menuItem" style="margin-top: 15px"> <div class="row"><div class ="topic"> <div class="well" style="background-color: #CDAF8B !important;"> <div class="row"><h4 class="menu_index"> ('+ (index+1) +') </h4><div class="centre"><h4 class="topic_title">'+ topics[index].title +'</h4><div class="btnContainer"><button class="btn menuButton" id="btn-'+ index +'">  Learn More  </button></div></div></div></div><br></div></p>'
+  var menuItem = '<p><div class="menuItem" style="margin-top: 15px"> <div class="row"><div class ="topic"> <div class="well" style="background-color: #CDAF8B !important;"> <div class="row"><h4 class="menu_index"> ('+ (index+1) +') </h4><div class="centre"><h4 class="topic_title">'+ topics[index].title +'</h4><div class="btnContainer"><button class="btn menuButton hvr-grow" id="btn-'+ index +'">  Learn More  </button></div></div></div></div><br></div></p>'
   $("#btnHome").hide();  
   $("#btnHomePhone").hide();  
   menuHTML.push(menuItem);
