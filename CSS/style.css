@@ -254,9 +254,14 @@ h3{
     padding: 10px;
 }
 .questionBox.well:hover {
-    background:
-    linear-gradient(0deg, rgba(133, 91, 49, 0.52), rgba(133, 91, 49, 0.52)),
-    url("../Images/background.jpg");
+    background: -webkit-gradient(linear, left top, right top, color-stop(0%, transparent), color-stop(50%,#fff), color-stop(100%,transparent)),
+    url("../Images/background.jpg")  ; /* Chrome, Safari4+ */
+    background: -webkit-linear-gradient(left, transparent 0%, rgba(133, 91, 49, 0.52) 50%,transparent 100%),
+    url("../Images/background.jpg")  ; /* Chrome10+, Safari5.1+ */
+    background: -moz-linear-gradient(left, transparent 0%, rgba(133, 91, 49, 0.52) 50%,transparent 100%),
+    url("../Images/background.jpg")  ;    /* FF3.6+ */
+    background: linear-gradient(to left,rgba(133, 91, 49, 0.52), rgba(133, 91, 49, 0.52)),
+    url("../Images/background.jpg")  ;   /* W3C */
 }
 
 .answer_index{
@@ -340,22 +345,7 @@ However, delay the fade out process for 2.5 seconds */
     to {bottom: 0; opacity: 0;}
 }
 
-/* Float */
 
-.hvr-float {
-    display: inline-block;
-    vertical-align: middle;
-    transform: translateZ(0);
-    box-shadow: 0 0 1px rgba(0, 0, 0, 0);
-    backface-visibility: hidden;
-    -moz-osx-font-smoothing: grayscale;
-    transition-duration: 0.3s;
-    transition-property: transform;
-    transition-timing-function: ease-out;
-  }
-  .hvr-float:hover{
-    transform: translateY(-8px);
-  }
 
 /* Grow */
 .hvr-grow {
