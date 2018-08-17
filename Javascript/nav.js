@@ -26,7 +26,7 @@ if(!$("*[id='"+ answerID +"']").is(":visible")){
 const questionID  = "question-"+formatted;
 const questionVal =  $("*[id='"+ questionID +"']").first().text();
 
-const fullText = "Question: " +  questionVal + "\n" + "Answer: " + answerVal;
+const fullText = "Question: " +  questionVal + " \r\n" + "Answer: " + answerVal;
 
 copyToClipboard(fullText);
 
