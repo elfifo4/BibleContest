@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <style>
+        table {
+            text-align: center;
+            margin: auto;
+        }
+        table, th , td  {
+            border: 1px solid grey;
+            border-collapse: collapse;
+            padding: 5px;
+        
+        }
+        table tr:nth-child(odd) {
+            background-color: #f1f1f1;
+        }
+        table tr:nth-child(even) {
+            background-color: #ffffff;
+        }
+        h1 {
+            text-align: center;
+        }
+        
+        #topics tr:hover {background-color: #ddd;}
+        #topics th {
+            padding-top: 12px;
+            padding-bottom: 12px;
+            text-align: left;
+            background-color: #4CAF50;
+            color: white;
+            align-content: center;
+            text-align: center;
+        }
+  
+        td a {
+            display:block;
+            width:100%;
+        }
+/*
+        #container {
+                display: block;
+                margin-left: auto;
+                margin-right: auto;
+                width: 100%;
+        }
+*/
+    </style>
+<body ng-app="myApp" dir="rtl">
+
+
+    <h1> שאלות פתוחות</h1>
+    <div ng-controller="customersCtrl"  id="container"> 
+
+        <table id="topics">
+        <th>מספר</th>
+        <th>נושא</th> 
+          <tr ng-repeat="data in myData">
+            <td>{{ data.id }}</td>
+            <td> <a href="{{ data.link }}"> {{ data.title }} </a></td>
+          </tr>
+        </table>
+
+    </div>
+    
+    <script>
+        
+        var topics = []; 
+        var globalHTML = [];
+        
+//            var spreadsheetID = "183inW1WHYuWbEN5174eIP8AQ4bCF4AZWuNqlucdOnDM";
+            var spreadsheetID = "1l2ZqkbAT-y8lbkHtlnINBz_kl2wYnqQ-arxhlI1JnuI";
+            var sheetNumber = 1;
+            var mainUrl = "https://spreadsheets.google.com/feeds/list/"
+            + spreadsheetID
+            + "/"
+            + sheetNumber
+            + "/public/values?alt=json";
+
+            
+        var app = angular.module('myApp', []);
+        app.controller('customersCtrl', function($scope, $http) {
+          $http.get(mainUrl).then(function (response) {
+              var entry = response.data.feed.entry;
+              
+              
+            $(entry).each(function(index){
+                if(index !== 0){
+               
+                    var obj = {"id":index,
+                               "title":entry[index].title.$t,
+                               "link":"https://spreadsheets.google.com/feeds/list/"
+                                       + spreadsheetID
+                                       + "/" + (index + 1) + "/public/values?alt=json", 
+                               "questions":[]}
+                    topics.push(obj);  
+                    console.log(obj);
+                }
+                
+                //make sure this matches your column labels when you change the source sheet
+            });
+              
+      
+//              $scope.myData = response.data.feed.entry;
+              $scope.myData = topics;
+          });
+        });
+
+          //Spreadsheet link
+        //"https://spreadsheets.google.com/feeds/list/1l2ZqkbAT-y8lbkHtlnINBz_kl2wYnqQ-arxhlI1JnuI/2/public/values?alt=json"
+        // ID of the Google Spreadsheet
+
+
+
+
+        //for each element that is classed as 'pull-down', set its margin-top to the difference between its own height and the height of its parent
+        $('.pull-down').each(function() {
+          var $this = $(this);
+          $this.css('margin-top', $this.parent().height() - $this.height())
+        });
+
+        $(".home").click(()=>{
+            location.reload();
+        });
+
+        var shuffled = false;
+        $(".shuffle").change(function() {
+            if(this.checked){
+                shuffled = true;
+            }else{
+                shuffled = false;
+            }
+        });
+
+
+        
+        
+//        $.ajax({
+//            url: mainUrl,
+//            dataType: 'json',
+//            async: false,
+//            success: function(data) {
+//
+//            var entry = data.feed.entry;
+//            $(entry).each(function(index){
+//                if(index !== 0){
+//                topics.push({"id":index,"title":entry[index].title.$t,"link":"https://spreadsheets.google.com/feeds/list/1l2ZqkbAT-y8lbkHtlnINBz_kl2wYnqQ-arxhlI1JnuI/" + (index + 1) + "/public/values?alt=json", "questions":[]});  
+//                }
+//                
+//                //make sure this matches your column labels when you change the source sheet
+//            });
+//                
+//            console.log(topics);
+//        }
+//        });
+    
+    </script>
+</body>
+</html>
