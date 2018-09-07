@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title> חידון התנ"ך </title>
+    <link rel="icon" type="image/png" href="images/icon.png">
+
+    <link href="css/style.css" rel="stylesheet" type="text/css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.2/angular.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+
+
+    <script>
+    </script>
+
+    <style>
+
+        .aParent div {
+            float: right;
+            clear: none;
+        }
+
+        .pair-table {
+            max-width: 30%;
+        }
+
+        label {
+            text-align: right;
+            /*clear: both;*/
+        }
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: 150px 150px;
+            grid-template-rows: auto auto;
+            grid-gap: 3px;
+            /*padding: 10px;*/
+            text-align: center;
+            justify-content: center;
+            /*background-color: rgba(218, 160, 0, 0.30); !*stroke*!*/
+        }
+
+        .grid-container-col {
+            display: grid;
+            grid-template-columns: 150px;
+            grid-gap: 3px;
+            /*padding: 10px;*/
+            text-align: center;
+            justify-content: center;
+
+            /*background-color: aqua;*/
+        }
+
+        .scroll-col {
+            height: 500px;
+            overflow: auto;
+            /*direction: ltr;*/
+
+        }
+
+        .invert-scroll {
+            direction: ltr;
+        }
+
+        /*.grid-container > div.col-title {*/
+        div.col-title {
+            text-align: center;
+            font-size: 150%;
+
+            border-radius: 10px;
+            /*padding: 5px 10px;*/
+
+            padding: 10px;
+            margin: 10px;
+
+            /*cursor: pointer;*/
+            background-color: rgba(218, 160, 0, 0.30); /*stroke*/
+
+        }
+
+        .key,
+        .value {
+            border-radius: 7px;
+            border: thin solid #daa000;
+            padding: 10px;
+            margin: 10px;
+            /*text-align: center;*/
+            /*vertical-align: center;*/
+            justify-content: center;
+
+        }
+
+        /*
+            YELLOW = 0xFFFFEB3B; //color for view to be dragged (value)
+            ORANGE = 0xFFFF9800; //color for view to drop onto on entering(key)
+            AMBER = 0xFFFFC107;  //color for view to drop onto it (key)
+        */
+        .key {
+            direction: rtl;
+            background: #FFC107;
+            /*            cursor: pointer;*/
+        }
+
+        .value {
+            /*            position: absolute;*/
+            background: #FFEB3B;
+            cursor: move;
+        }
+
+        .mySpan {
+            display: inline-block;
+            vertical-align: middle;
+            line-height: normal;
+        }
+
+        /*.key > span,*/
+        /*.value > span {*/
+        /*display: inline-block;*/
+        /*vertical-align: middle;*/
+        /*line-height: normal;*/
+        /*}*/
+
+        .small {
+            font-size: 70%;
+        }
+
+    </style>
+
+</head>
+
+<body ng-app="myApp" dir="rtl">
+
+<div ng-controller="topicsCtrl" id="container">
+
+    <div class="navbar">
+        <div class="page-title">התאמת זוגות</div>
+    </div>
+
+    <div class="main">
+
+
+        <div ng-repeat="data in myData ">
+
+            <div style="text-align: center;">
+                <h4>{{$index+1}}. {{ data.topic }} ({{data.source}})</h4>
+            </div>
+
+            <div class="grid-container">
+
+                <div class="col-title">{{ data.key }}</div>
+                <div class="col-title">{{ data.value }}</div>
+
+                <div ng-repeat="p in ['k', 'v']"
+                     ng-class=
+                             "{'scroll-col' : true , 'custom-scrollbar': true,
+                             'invert-scroll' : p=='k'}">
+                    <div class="grid-container-col"
+                         ng-repeat="pair in data.pairList">
+                        <div ng-class="{'k': 'key', 'v': 'value'}[p]">
+                            {{ pair[p] }}
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <br>
+
+        </div>
+
+        <br>
+        <br>
+
+
+        <!-- loading layout replaced by app after startupp -->
+
+        <div class="app-loading" ng-show="loading">
+            <div class="logo"></div>
+            <svg class="spinner" viewBox="25 25 50 50">
+                <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10"/>
+            </svg>
+        </div>
+
+
+    </div>
+
+</div>
+
+<script>
+    var topics = [];
+    var spreadsheetID = "1aIOcjMgBVOjCD2bnePsM-HSAxjEkbj1SDbo3rU_pgNU";
+    var prefix = "gsx$";
+    var listField = prefix + "רשימה";
+    var keyField = prefix + "מפתח";
+    var valueField = prefix + "ערך";
+
+    var sheetNumber = 1;
+    var mainUrl = "https://spreadsheets.google.com/feeds/list/" +
+        spreadsheetID +
+        "/" +
+        sheetNumber +
+        "/public/values?alt=json";
+
+    var app = angular.module('myApp', []);
+
+    app.controller('topicsCtrl',
+        function ($scope, $http, $log) {
+            $scope.showTopics = function () {
+                $scope.loading = true; // show loading spinner
+                $log.log("mainUrl: " + mainUrl); //@
+                $http.get(mainUrl).then(function (response) {
+                    let entry = response.data.feed.entry;
+                    let self = this; // reference to this in current scope
+                    let obj = {};
+                    $(entry).each(function (index) {
+                        let row = entry[index];
+                        let type = row[listField].$t;
+                        let key = row[keyField].$t;
+                        let value = row[valueField].$t;
+                        if (type.startsWith("נושא")) {
+                            if (self.obj !== undefined) {
+                                topics.push(self.obj);
+                            }
+                            self.obj = {
+                                pairList: []
+                            };
+                        } else if (type.startsWith("תיאור")) {
+                            self.obj.topic = key;
+                            self.obj.source = value;
+                        } else if (type.startsWith("כותרת")) {
+                            self.obj.key = key;
+                            self.obj.value = value;
+                        } else if (type === "") {
+                            let pair = {
+                                "k": key,
+                                "v": value,
+                            };
+                            self.obj.pairList.push(pair);
+                        }
+                    });
+                    $scope.myData = topics;
+                }, function (response) {
+                    alert("שגיאה: " + response);
+                    // called asynchronously if an error occurs
+                    // or server returns response with an error status.
+                }).finally(function () {
+                    // called no matter success or failure
+                    $scope.loading = false; // hide loading spinner
+                });
+            };
+            $scope.showTopics();
+        });
+</script>
+
+</body>
+
+</html>
