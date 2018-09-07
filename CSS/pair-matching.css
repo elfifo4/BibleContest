@@ -1,0 +1,468 @@
+@font-face {
+    font-family: "Keter YG";
+    src: url("../Fonts/Keter YG Medium.ttf");
+}
+
+/*
+.ignore-css {
+    all: unset;
+}
+*/
+
+/*
+.reset {
+all: initial;
+* {
+all: unset;
+}
+}
+*/
+
+body {
+    font-family: 'Keter YG', Arial, sans-serif;
+    direction: rtl;
+    background: fixed no-repeat url("../Images/parchment_background.png")  ;
+    background-size: 100% 100%;
+
+}
+
+/* The navigation bar */
+.navbar {
+    overflow: hidden;
+    background-color: #795548; /*primary color*/
+    position: fixed; /* Set the navbar to fixed position */
+    top: 0; /* Position the navbar at the top of the page */
+    width: 100%; /* Full width */
+}
+
+.navbar p {
+/*accent color*/
+    color: #FF5722;
+}
+
+
+table,
+form {
+    text-align: center;
+    margin: auto;
+}
+
+.verticalLine {
+    border-left: 1px dashed brown;
+}
+
+.checkboxes-list {
+    width: auto;
+    height: 450px;
+    overflow: auto;
+    overflow-x: hidden;
+    /*background: transparent;*/
+    padding: 10px 40px 10px 10px;
+    /*margin: 10px;*/
+    display: inline-block;
+    text-align: center;
+
+}
+
+p {
+    text-align: center;
+}
+
+
+#questions {
+    width: 70%;
+}
+
+table,
+th,
+td {
+    border: 1px solid grey;
+    border-collapse: collapse;
+    padding: 5px;
+
+}
+
+table tr:nth-child(odd) {
+    background-color: #f1f1f1;
+}
+
+table tr:nth-child(even) {
+    background-color: #ffffff;
+}
+
+h1,
+h2 {
+    text-align: center;
+}
+
+.my-table tr:hover {
+    background-color: #ddd;
+}
+
+p.white-space-pre-line {
+    white-space: pre-line;
+}
+
+/*topic-name*/
+
+td.topic-name,
+td.answer {
+    cursor: pointer;
+    /*    background-color: #5143c3;*/
+}
+
+.question {
+    /*            background-color: #84f6ff;*/
+}
+
+td.correct {
+    background-color: #00FF00;
+    /*    cursor: pointer;*/
+}
+
+td.wrong {
+    background-color: #FF0000;
+}
+
+/*
+td.topic-name :hover {
+	text-decoration: underline;
+}
+*/
+
+.my-table th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    /*text-align: left;*/
+    background-color: #4CAF50;
+    color: white;
+    align-content: center;
+    text-align: center;
+}
+
+td a {
+    display: block;
+    width: 100%;
+}
+
+/*
+#container {
+display: block;
+margin-left: auto;
+margin-right: auto;
+width: 100%;
+}
+*/
+
+/* The container */
+
+.fromRightToLeft{
+    direction: rtl;
+}
+
+div.main-container {
+    text-align: center;
+    margin: auto;
+}
+
+.half-transparent {
+    background: rgba(200, 200, 50, 0.5);
+    /*z-index: -2;*/
+}
+
+.seventy-transparent {
+    background: rgba(200, 200, 50, 0.7);
+}
+
+
+/* Main content */
+.main {
+    margin-top: 70px; /* Add a top margin to avoid content overlay */
+}
+
+
+.page-title {
+    font-size: 150%;
+    text-align: center;
+    color: white;
+}
+
+.container {
+    /*direction: ltr;*/
+    display: block;
+    position: relative;
+    margin: 12px;
+    cursor: pointer;
+    font-size: 20px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    /*z-index: 1;*/
+}
+
+/* Hide the browser's default checkbox */
+
+.container input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+}
+
+/* Create a custom checkbox */
+
+.check-mark {
+    position: absolute;
+    margin-left: 10px;
+    margin-right: 10px;
+    /* padding: 5px; */
+    height: 25px;
+    width: 25px;
+    background-color: #eee;
+    border-radius: 4px;
+
+}
+
+/* On mouse-over, add a grey background color */
+
+.container:hover input ~ .check-mark {
+    background-color: #ccc;
+}
+
+/* When the checkbox is checked, add a blue background */
+
+.container input:checked ~ .check-mark {
+    background-color: #FF5722;
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+
+.check-mark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+/* Show the checkmark when checked */
+
+.container input:checked ~ .check-mark:after {
+    display: block;
+}
+
+/* Style the checkmark/indicator */
+
+.container .check-mark:after {
+    left: 9px;
+    top: 5px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+
+.app-loading {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+
+.app-loading .spinner {
+    height: 100px;
+    width: 100px;
+    animation: rotate 1s linear infinite;
+    transform-origin: center center;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+}
+
+.app-loading .spinner .path {
+    stroke-dasharray: 1, 200;
+    stroke-dashoffset: 0;
+    animation: dash 1.5s ease-in-out infinite;
+    stroke-linecap: round;
+    stroke: #ddd;
+}
+
+@keyframes rotate {
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes dash {
+    0% {
+        stroke-dasharray: 1, 200;
+        stroke-dashoffset: 0;
+    }
+    50% {
+        stroke-dasharray: 89, 200;
+        stroke-dashoffset: -35px;
+    }
+    100% {
+        stroke-dasharray: 89, 200;
+        stroke-dashoffset: -124px;
+    }
+}
+
+/* The snackbar - position it at the bottom and in the middle of the screen */
+
+#snackbar {
+    visibility: hidden;
+    /* Hidden by default. Visible on click */
+    min-width: 250px;
+    /* Set a default minimum width */
+    margin-left: -125px;
+    /* Divide value of min-width by 2 */
+    background-color: #333;
+    /* Black background color */
+    color: #fff;
+    /* White text color */
+    text-align: center;
+    /* Centered text */
+    border-radius: 2px;
+    /* Rounded borders */
+    padding: 16px;
+    /* Padding */
+    position: fixed;
+    /* Sit on top of the screen */
+    z-index: 1;
+    /* Add a z-index if needed */
+    left: 50%;
+    /* Center the snackbar */
+    bottom: 30px;
+    /* 30px from the bottom */
+}
+
+/* Show the snackbar when clicking on a button (class added with JavaScript) */
+
+#snackbar.show {
+    visibility: visible;
+    /* Show the snackbar */
+    /* Add animation: Take 0.5 seconds to fade in and out the snackbar. 
+However, delay the fade out process for 2.5 seconds */
+    /* Add animation: Take 0.5 seconds to fade in and out the snackbar. 
+However, delay the fade out process for 2.5 seconds */
+    -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+    animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+
+/* Animations to fade the snackbar in and out */
+
+@-webkit-keyframes fadein {
+    from {
+        bottom: 0;
+        opacity: 0;
+    }
+    to {
+        bottom: 30px;
+        opacity: 1;
+    }
+}
+
+@keyframes fadein {
+    from {
+        bottom: 0;
+        opacity: 0;
+    }
+    to {
+        bottom: 30px;
+        opacity: 1;
+    }
+}
+
+@-webkit-keyframes fadeout {
+    from {
+        bottom: 30px;
+        opacity: 1;
+    }
+    to {
+        bottom: 0;
+        opacity: 0;
+    }
+}
+
+@keyframes fadeout {
+    from {
+        bottom: 30px;
+        opacity: 1;
+    }
+    to {
+        bottom: 0;
+        opacity: 0;
+    }
+}
+
+/*
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+*/
+
+/* Mobile Styles */
+
+@media only screen and (max-width: 400px) {
+    body {
+        background-color: #F09A9D;
+        /* Red */
+    }
+}
+
+/* Tablet Styles */
+
+@media only screen and (min-width: 401px) and (max-width: 960px) {
+    body {
+        background-color: #F5CF8E;
+        /* Yellow */
+    }
+}
+
+/* Desktop Styles */
+
+@media only screen and (min-width: 961px) {
+    body {
+        background-color: #ffffff;
+        /* Blue */
+    }
+}
+
+
+
+/* width */
+.custom-scrollbar::-webkit-scrollbar {
+    width: 5px;
+}
+
+/* Track */
+.custom-scrollbar::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px grey;
+    border-radius: 10px;
+}
+
+/* Handle */
+.custom-scrollbar::-webkit-scrollbar-thumb {
+    /*background: red;*/
+    /*colorPrimaryLight*/
+    /*background: #D7CCC8;*/
+    background: #795548;
+    border-radius: 10px;
+}
+
+/* Handle on hover */
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    /*background: #b30000;*/
+    /*colorPrimary*/
+    /*background: #795548;*/
+    background: #5D4037;
+}
