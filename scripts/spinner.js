@@ -1,0 +1,13 @@
+angular.module('spinner', [])
+    .directive('spinner', function () {
+        return {
+            restrict: 'E',
+            template:
+                '<div class="app-loading">' +
+                '<svg class="spinner" xmlns="http://www.w3.org/2000/svg" viewBox="25 25 50 50">' +
+                '<circle class="path" cx="50" cy="50" r="20" fill="none" ' +
+                'stroke-width="2" stroke-miterlimit="10"></circle>' +
+                '</svg>' +
+                '</div>'
+        };
+    });
