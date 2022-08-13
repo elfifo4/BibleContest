@@ -1,6 +1,8 @@
-## Jewish Bible Contest - Privacy Policy
-## הראשון בחידון - חידון התנ"ך - מדיניות פרטיות
+## חידון התנ"ך - מדיניות פרטיות
 הראשון בחידון - חידון התנ"ך
+
+Jewish Bible Contest - Privacy Policy
+
 https://play.google.com/store/apps/details?id=com.eladfinish.jewishbiblecontest
 
 1. איסוף מידע
