@@ -1,4 +1,4 @@
-https://elfifo4.github.io/BibleContest.github.io/
+https://elfifo4.github.io/BibleContest/
 
 ## Bible Contest חידון התנ"ך
 
