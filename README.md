@@ -1,41 +1,23 @@
-https://elfifo4.github.io/BibleContest/
+# Bible Contest (חידון התנ"ך) — companion web pages
 
-## Bible Contest חידון התנ"ך
+Static web pages that accompany the
+[Bible Contest – Tanakh Quiz](https://play.google.com/store/apps/details?id=com.eladfinish.jewishbiblecontest)
+Android app. The site is served with GitHub Pages at
+<https://elfifo4.github.io/BibleContest/>.
 
-## Welcome to GitHub Pages
+This repository does not contain the app itself.
 
-You can use the [editor on GitHub](https://github.com/elfifo4/BibleContest.github.io/edit/master/README.md) to maintain and preview the content for your website in Markdown files.
+## Contents
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+| Page | Purpose |
+| --- | --- |
+| [`index.html`](https://elfifo4.github.io/BibleContest/) | Landing page |
+| [`questions.html`](https://elfifo4.github.io/BibleContest/questions.html) | Quiz questions in the browser |
+| [`pair-matching.html`](https://elfifo4.github.io/BibleContest/pair-matching.html) | Pair-matching game |
+| [`copy_text.html`](https://elfifo4.github.io/BibleContest/copy_text.html) | Browsing and copying Tanakh text |
+| [`PRIVACY_POLICY.md`](PRIVACY_POLICY.md) | The app's privacy policy (Hebrew) |
 
-### Markdown
+## Status
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
-
-```markdown
-Syntax highlighted code block
-
-# Header 1
-## Header 2
-### Header 3
-
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
-```
-
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
-
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/elfifo4/BibleContest.github.io/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://help.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+Legacy. The pages are plain HTML, CSS and JavaScript with no build step, and were last updated
+in 2022. They stay online because the app's store listing links to the privacy policy here.
